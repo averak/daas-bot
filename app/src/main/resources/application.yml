@@ -3,9 +3,9 @@ spring:
     url: jdbc:mysql://localhost:3306/daas
     username: "daas"
     password: "daas"
-    driver-class-name: com.mysql.jdbc.Driver
 
   flyway:
     password: "daas"
     user: "daas"
     url: jdbc:mysql://localhost:3306/daas
+    locations: classpath:db/migration

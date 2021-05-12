@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS `dajare` (
+  `id` VARCHAR(11) NOT NULL,
+  `text` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`));
