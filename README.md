@@ -17,6 +17,10 @@ This app is a bot of DaaS (Dajare as a Service).
 
 ### How to run
 
+`$ java -jar daas-bot-<version>.jar`
+
+### How to run on dev environment
+
 1. Clone this repository
 2. Run `$ cd daas-bot`
 3. Run `$ docker-compose up -d`

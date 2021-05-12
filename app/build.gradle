@@ -58,3 +58,7 @@ flyway {
     user = "daas"
     password = "daas"
 }
+
+bootJar{
+    archiveBaseName = "daas-bot"
+}
