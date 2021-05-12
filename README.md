@@ -1,5 +1,7 @@
 # DaaS Bot
 
+![build](https://github.com/averak/daas-bot/workflows/build/badge.svg)
+![test](https://github.com/averak/daas-bot/workflows/test/badge.svg)
 ![Version 1.0](https://img.shields.io/badge/version-1.0-yellow.svg)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 [![Twitter](https://img.shields.io/badge/Twitter-%40rits_dajare-blue?style=flat-square&logo=twitter)](https://twitter.com/rits_dajare)
