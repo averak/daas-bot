@@ -22,14 +22,6 @@ dependencies {
     // flyway
     implementation "org.flywaydb:flyway-core"
 
-    // mybatis
-    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2"
-    implementation "org.mybatis.generator:mybatis-generator-core:1.4.0"
-    implementation "com.softwareloop:mybatis-generator-lombok-plugin:1.0"
-
-    // mysql
-    implementation "mysql:mysql-connector-java"
-
     // JUnit
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude group: "org.junit.vintage", module: "junit-vintage-engine"
@@ -40,6 +32,14 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:1.18.12"
     testImplementation "org.projectlombok:lombok:1.18.12"
     testAnnotationProcessor "org.projectlombok:lombok:1.18.12"
+
+    // mybatis
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2"
+    implementation "org.mybatis.generator:mybatis-generator-core:1.4.0"
+    implementation "org.mybatis.generator:mybatis-generator-maven-plugin:1.4.0"
+
+    // mysql
+    implementation "mysql:mysql-connector-java"
 
     // swagger
     implementation "io.springfox:springfox-swagger2:2.9.2"
@@ -52,6 +52,11 @@ bootJar{
 
 ext {
     gradleDir = "../gradle"
+    driverClass = 'com.mysql.jdbc.Driver'
+    connectionURL = 'jdbc:mysql://localhost:3306/daas?useSSL=false'
+    schema = 'daas'
+    dbUser = 'daas'
+    dbPassword = 'daas'
 }
 
 apply from: "${gradleDir}/mybatis.gradle"
