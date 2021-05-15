@@ -45,20 +45,14 @@ dependencies {
     implementation "io.springfox:springfox-swagger-ui:2.9.2"
 }
 
-test {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "failed", "skipped")
-    }
-}
-
-flyway {
-    driver = "com.mysql.jdbc.Driver"
-    url = "jdbc:mysql://localhost:3306/daas"
-    user = "daas"
-    password = "daas"
-}
-
 bootJar{
     archiveBaseName = "daas-bot"
 }
+
+ext {
+    gradleDir = "../gradle"
+}
+
+apply from: "${gradleDir}/mybatis.gradle"
+apply from: "${gradleDir}/flyway.gradle"
+apply from: "${gradleDir}/test.gradle"

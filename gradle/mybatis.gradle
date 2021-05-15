@@ -1,0 +1,4 @@
+mybatisGenerator {
+    verbose = true
+    configFile = "app/src/main/resources/generatorConfig.xml"
+}
