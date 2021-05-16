@@ -2,11 +2,14 @@ package dev.abelab.daas.repository;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import lombok.RequiredArgsConstructor;
 import dev.abelab.daas.db.entity.Dajare;
 import dev.abelab.daas.db.mapper.DajareMapper;
 
 @RequiredArgsConstructor
+@Repository
 public class DajareRepository {
 
     private final DajareMapper dajareMapper;
