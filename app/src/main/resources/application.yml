@@ -6,8 +6,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 
   flyway:
-    url: ${spring.datasource.url}
-    user: ${spring.datasource.user}
-    password: ${spring.datasource.password}
+    url: jdbc:mysql://localhost:3306/daas
+    username: "daas"
+    password: "daas"
     locations: classpath:db/migration
-    driver-class-name: ${spring.datasource.driver-class-name}
+    driver-class-name: com.mysql.jdbc.Driver
