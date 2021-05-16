@@ -6,6 +6,11 @@
 		<property name="beginningDelimiter" value="`" />
 		<property name="endingDelimiter" value="`" />
 
+		<plugin type="com.softwareloop.mybatis.generator.plugins.LombokPlugin">
+			<property name="builder" value="true" />
+			<property name="allArgsConstructor" value="true" />
+		</plugin>
+
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/daas?useSSL=false" userId="daas" password="daas" />
 		<javaModelGenerator targetPackage="dev.abelab.daas.db.entity" targetProject="app/src/main/java" />
 		<sqlMapGenerator targetPackage="dev.abelab.daas.db.mapper" targetProject="app/src/main/resources" />

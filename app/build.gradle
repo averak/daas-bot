@@ -14,6 +14,10 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    mybatisGenerator
+}
+
 dependencies {
     // spring
     implementation "org.springframework.boot:spring-boot-starter-web"
@@ -21,11 +25,6 @@ dependencies {
 
     // flyway
     implementation "org.flywaydb:flyway-core"
-
-    // JUnit
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude group: "org.junit.vintage", module: "junit-vintage-engine"
-    }
 
     // lombok
     implementation "org.projectlombok:lombok:1.18.12"
@@ -35,15 +34,19 @@ dependencies {
 
     // mybatis
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2"
-    implementation "org.mybatis.generator:mybatis-generator-core:1.4.0"
     implementation "org.mybatis.generator:mybatis-generator-maven-plugin:1.4.0"
-
-    // mysql
-    implementation "mysql:mysql-connector-java"
+    mybatisGenerator "org.mybatis.generator:mybatis-generator-core:1.4.0"
+    mybatisGenerator "com.softwareloop:mybatis-generator-lombok-plugin:1.0"
+    mybatisGenerator "mysql:mysql-connector-java"
 
     // swagger
     implementation "io.springfox:springfox-swagger2:2.9.2"
     implementation "io.springfox:springfox-swagger-ui:2.9.2"
+
+    // test
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.jmockit:jmockit:1.48"
+
 }
 
 bootJar{
@@ -52,11 +55,11 @@ bootJar{
 
 ext {
     gradleDir = "../gradle"
-    driverClass = 'com.mysql.jdbc.Driver'
-    connectionURL = 'jdbc:mysql://localhost:3306/daas?useSSL=false'
-    schema = 'daas'
-    dbUser = 'daas'
-    dbPassword = 'daas'
+    driverClass = "com.mysql.jdbc.Driver"
+    connectionURL = "jdbc:mysql://localhost:3306/daas?useSSL=false"
+    schema = "daas"
+    dbUser = "daas"
+    dbPassword = "daas"
 }
 
 apply from: "${gradleDir}/mybatis.gradle"
