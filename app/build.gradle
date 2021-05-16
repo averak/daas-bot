@@ -39,6 +39,9 @@ dependencies {
     mybatisGenerator "com.softwareloop:mybatis-generator-lombok-plugin:1.0"
     mybatisGenerator "mysql:mysql-connector-java"
 
+    // mysql
+    implementation "mysql:mysql-connector-java"
+
     // swagger
     implementation "io.springfox:springfox-swagger2:2.9.2"
     implementation "io.springfox:springfox-swagger-ui:2.9.2"
@@ -56,7 +59,7 @@ bootJar{
 ext {
     gradleDir = "../gradle"
     driverClass = "com.mysql.jdbc.Driver"
-    connectionURL = "jdbc:mysql://localhost:3306/daas?useSSL=false"
+    connectionURL = "jdbc:mysql://localhost:3306/daas?useSSL=false&allowPublicKeyRetrieval=true"
     schema = "daas"
     dbUser = "daas"
     dbPassword = "daas"
