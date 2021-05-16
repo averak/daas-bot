@@ -65,6 +65,7 @@ ext {
     dbPassword = "daas"
 }
 
-apply from: "${gradleDir}/mybatis.gradle"
 apply from: "${gradleDir}/flyway.gradle"
+apply from: "${gradleDir}/javadoc.gradle"
+apply from: "${gradleDir}/mybatis.gradle"
 apply from: "${gradleDir}/test.gradle"
