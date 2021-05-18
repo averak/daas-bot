@@ -1,4 +1,4 @@
-package dev.abelab.daas.repository;
+package dev.abelab.daas.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,25 +14,21 @@ import mockit.Injectable;
 import mockit.Tested;
 
 import dev.abelab.daas.db.entity.Dajare;
-import dev.abelab.daas.db.mapper.DajareMapper;
+import dev.abelab.daas.repository.DajareRepository;
 
-class DajareRepositoryTest {
+class DajareServiceTest {
 
 	@Injectable
-	DajareMapper dajareMapper;
-
-	@Tested
 	DajareRepository dajareRepository;
 
+	@Tested
+	DajareService dajareService;
+
 	@Test
-	void 正_ダジャレを保存する() {
+	void 正_ダジャレを採点する() {
 	}
 
 	@Test
-	void 正_ダジャレが存在する() {
-	}
-
-	@Test
-	void 異_ダジャレが存在しない() {
+	void 正_前処理を加える() {
 	}
 }

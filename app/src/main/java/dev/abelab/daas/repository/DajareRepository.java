@@ -3,8 +3,8 @@ package dev.abelab.daas.repository;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
-
 import lombok.RequiredArgsConstructor;
+
 import dev.abelab.daas.db.entity.Dajare;
 import dev.abelab.daas.db.mapper.DajareMapper;
 
@@ -32,7 +32,7 @@ public class DajareRepository {
      *
      * @return ダジャレ
      */
-    public Optional<Dajare> findById(int id) {
+    public Optional<Dajare> selectById(int id) {
         return Optional.ofNullable(this.dajareMapper.selectByPrimaryKey(id));
     }
 }

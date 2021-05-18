@@ -20,6 +20,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
 import dev.abelab.daas.api.request.DajareRankingRequest;
 import dev.abelab.daas.api.response.DajareResponse;
 import dev.abelab.daas.api.response.DajareRankingResponse;
@@ -70,7 +71,7 @@ public class DajareRestController {
             } //
     )
     @RequestMapping(path = "/ranking", method = RequestMethod.POST)
-    public DajareRankingResponse getDajareRanking() {
+    public DajareRankingResponse getDajareRanking(String term) {
         return null;
     }
 }

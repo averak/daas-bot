@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.Builder;
 import lombok.Singular;
 import lombok.Value;
+
 import dev.abelab.daas.db.entity.Dajare;
 
 /**
