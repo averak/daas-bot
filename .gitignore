@@ -92,6 +92,3 @@ local.properties
 target/
 
 bin/
-
-### Docker ###
-docker/

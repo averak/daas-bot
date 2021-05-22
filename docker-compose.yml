@@ -1,13 +1,28 @@
 version: "3"
 services:
-  mysql:
-    image: "mysql:8"
+  db-local:
+    build: ./mysql
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: "daas"
       MYSQL_DATABASE: "daas"
       MYSQL_USER: "daas"
       MYSQL_PASSWORD: "daas"
+      MYSQL_ROOT_PASSWORD: "daas"
     ports:
       - "3306:3306"
     volumes:
-      - "./docker/mysql/data:/var/lib/mysql"
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/log/local:/var/log/mysql
+  db-test:
+    build: ./mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: "daas"
+      MYSQL_USER: "daas"
+      MYSQL_PASSWORD: "daas"
+      MYSQL_ROOT_PASSWORD: "daas"
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/log/test:/var/log/mysql
