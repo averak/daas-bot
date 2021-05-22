@@ -12,10 +12,10 @@
 			<property name="allArgsConstructor" value="true" />
 		</plugin>
 
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/daas?useSSL=false" userId="daas" password="daas" />
-		<javaModelGenerator targetPackage="dev.abelab.daas.db.entity" targetProject="app/src/main/java" />
-		<sqlMapGenerator targetPackage="dev.abelab.daas.db.mapper" targetProject="app/src/main/resources" />
-		<javaClientGenerator targetPackage="dev.abelab.daas.db.mapper" targetProject="app/src/main/java" type="XMLMAPPER" />
+		<jdbcConnection driverClass="${db.driver}" connectionURL="${db.url}" userId="${db.user}" password="${db.password}" />
+		<javaModelGenerator targetPackage="${generator.model.package}" targetProject="${generator.model.project}" />
+		<sqlMapGenerator targetPackage="${generator.map.package}" targetProject="${generator.map.project}" />
+		<javaClientGenerator targetPackage="${generator.client.package}" targetProject="${generator.client.project}" type="${generator.client.type}" />
 
 		<table tableName="dajare">
 			<generatedKey column="id" sqlStatement="JDBC" identity="true" />

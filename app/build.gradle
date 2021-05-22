@@ -1,10 +1,26 @@
-plugins {
-    id "org.springframework.boot" version "2.2.5.RELEASE"
-    id "io.spring.dependency-management" version "1.0.9.RELEASE"
-    id "org.flywaydb.flyway" version "6.3.1"
-    id "com.thinkimi.gradle.MybatisGenerator" version "2.1.2"
-    id "java"
+buildscript {
+    ext {
+        springBootVersion = "2.2.5.RELEASE"
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.6.RELEASE"
+        classpath "org.flywaydb:flyway-gradle-plugin:6.1.4"
+        classpath "org.yaml:snakeyaml:1.19"
+        classpath "org.jacoco:org.jacoco.ant:0.8.3"
+    }
 }
+
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+apply plugin: "org.flywaydb.flyway"
+apply plugin: "java"
+apply plugin: "groovy"
+apply plugin: "eclipse"
+apply plugin: "idea"
 
 group = "dev.abelab"
 version = "1.0"
@@ -15,7 +31,7 @@ repositories {
 }
 
 configurations {
-    mybatisGenerator
+    mybatisGenerate
 }
 
 dependencies {
@@ -35,9 +51,9 @@ dependencies {
     // mybatis
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2"
     implementation "org.mybatis.generator:mybatis-generator-maven-plugin:1.4.0"
-    mybatisGenerator "org.mybatis.generator:mybatis-generator-core:1.4.0"
-    mybatisGenerator "com.softwareloop:mybatis-generator-lombok-plugin:1.0"
-    mybatisGenerator "mysql:mysql-connector-java"
+    mybatisGenerate "org.mybatis.generator:mybatis-generator-core:1.4.0"
+    mybatisGenerate "com.softwareloop:mybatis-generator-lombok-plugin:1.0"
+    mybatisGenerate "mysql:mysql-connector-java"
 
     // mysql
     implementation "mysql:mysql-connector-java"
@@ -50,6 +66,8 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.jmockit:jmockit:1.48"
 
+    // yaml
+    implementation "org.yaml:snakeyaml:1.17"
 }
 
 bootJar{
@@ -57,15 +75,22 @@ bootJar{
 }
 
 ext {
-    gradleDir = "../gradle"
-    driverClass = "com.mysql.jdbc.Driver"
-    connectionURL = "jdbc:mysql://localhost:3306/daas?useSSL=false&allowPublicKeyRetrieval=true"
-    schema = "daas"
-    dbUser = "daas"
-    dbPassword = "daas"
+    // path config
+    JAVA_ROOT_PATH = "app/src/main/java"
+    RESOURCES_ROOT_PATH = "app/src/main/resources"
+    PROPERTY_ROOT_PATH = "${rootProject.rootDir.path}/${RESOURCES_ROOT_PATH}"
+    GRADLE_ROOT_PATH = "../gradle"
+
+    // application property file
+    BASE_PROPERTY_FILE = "application.yml"
+    EXTENSION_PROPERTY_FILE = "application-${System.getProperty("spring.profiles.active")}.yml"
+
+    // application property
+    BASE_PROPERTY = new org.yaml.snakeyaml.Yaml().load(new File("${PROPERTY_ROOT_PATH}/${BASE_PROPERTY_FILE}").newInputStream())
+    // EXTENSION_PROPERTY = new org.yaml.snakeyaml.Yaml().load(new File("${PROPERTY_ROOT_PATH}/${EXTENSION_PROPERTY_FILE}").newInputStream())
 }
 
-apply from: "${gradleDir}/flyway.gradle"
-apply from: "${gradleDir}/javadoc.gradle"
-apply from: "${gradleDir}/mybatis.gradle"
-apply from: "${gradleDir}/test.gradle"
+apply from: "${GRADLE_ROOT_PATH}/flyway.gradle"
+apply from: "${GRADLE_ROOT_PATH}/javadoc.gradle"
+apply from: "${GRADLE_ROOT_PATH}/mybatis.gradle"
+apply from: "${GRADLE_ROOT_PATH}/test.gradle"

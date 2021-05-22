@@ -1,6 +1,6 @@
 flyway {
-    driver = "${driverClass}"
-    url = "${connectionURL}"
-    user = "${dbUser}"
-    password = "${dbPassword}"
+    driver = BASE_PROPERTY.spring.datasource.driver
+    url = BASE_PROPERTY.spring.datasource.url
+    user = BASE_PROPERTY.spring.datasource.username
+    password = BASE_PROPERTY.spring.datasource.password
 }

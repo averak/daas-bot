@@ -1,4 +1,46 @@
-mybatisGenerator {
-    verbose = true
-    configFile = "app/src/main/resources/generatorConfig.xml"
+ext {
+    MYBATIS_CONFIG_FILE = BASE_PROPERTY.daas.mybatis.config.file
+    MYBATIS_MODEL_PACKAGE = "${BASE_PROPERTY.daas.package}.${BASE_PROPERTY.daas.mybatis.model.package}"
+    MYBATIS_CLIENT_PACKAGE = "${BASE_PROPERTY.daas.package}.${BASE_PROPERTY.daas.mybatis.client.package}"
+    MYBATIS_MAP_PACKAGE = "${BASE_PROPERTY.daas.package}.${BASE_PROPERTY.daas.mybatis.map.package}"
+}
+
+task mbgenerate doLast {
+    ant.taskdef(
+            name: "genfiles",
+            classpath: configurations.mybatisGenerate.asPath + ":build/classes/java/main",
+            classname: "org.mybatis.generator.ant.GeneratorAntTask"
+    )
+
+    ant.properties["db.url"] = BASE_PROPERTY.spring.datasource.url.toString()
+    ant.properties["db.user"] = BASE_PROPERTY.spring.datasource.username.toString()
+    ant.properties["db.password"] = BASE_PROPERTY.spring.datasource.password.toString()
+    ant.properties["db.driver"] = BASE_PROPERTY.spring.datasource.driver.toString()
+    ant.properties["generator.model.project"] = JAVA_ROOT_PATH.toString()
+    ant.properties["generator.model.package"] = MYBATIS_MODEL_PACKAGE.toString()
+    ant.properties["generator.client.project"] = JAVA_ROOT_PATH.toString()
+    ant.properties["generator.client.package"] = MYBATIS_CLIENT_PACKAGE.toString()
+    ant.properties["generator.client.type"] = BASE_PROPERTY.daas.mybatis.client.type.toString()
+    ant.properties["generator.map.project"] = RESOURCES_ROOT_PATH
+    ant.properties["generator.map.package"] = MYBATIS_MAP_PACKAGE.toString()
+
+    ant.genfiles(
+            configfile: "${RESOURCES_ROOT_PATH}/${MYBATIS_CONFIG_FILE}",
+            overwrite: "true",
+            verbose: "true"
+    ) {
+        propertyset {
+            propertyref(name: "db.url")
+            propertyref(name: "db.user")
+            propertyref(name: "db.password")
+            propertyref(name: "db.driver")
+            propertyref(name: "generator.model.project")
+            propertyref(name: "generator.model.package")
+            propertyref(name: "generator.client.project")
+            propertyref(name: "generator.client.package")
+            propertyref(name: "generator.client.type")
+            propertyref(name: "generator.map.project")
+            propertyref(name: "generator.map.package")
+        }
+    }
 }

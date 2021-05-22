@@ -1,13 +1,29 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/daas
-    username: "daas"
-    password: "daas"
-    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/daas?allowPublicKeyRetrieval=true&useSSL=false
+    username: daas
+    password: daas
+    driver: com.mysql.cj.jdbc.Driver
 
   flyway:
-    url: jdbc:mysql://localhost:3306/daas
-    username: "daas"
-    password: "daas"
+    baselineOnMigrate: true
+    validateOnMigrate: false
+    outOfOrder: false
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    driver: ${spring.datasource.driver}
     locations: classpath:db/migration
-    driver-class-name: com.mysql.jdbc.Driver
+
+daas:
+  package: dev.abelab.daas
+  mybatis:
+    config:
+      file: generatorConfig.xml
+    model:
+      package: db.entity
+    client:
+      package: db.mapper
+      type: XMLMAPPER
+    map:
+      package: db.mapper
