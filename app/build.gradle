@@ -83,11 +83,17 @@ ext {
 
     // application property file
     BASE_PROPERTY_FILE = "application.yml"
-    EXTENSION_PROPERTY_FILE = "application-${System.getProperty("spring.profiles.active")}.yml"
+    EXTENSION_PROPERTY_FILE = "application-${System.getProperty("spring.profiles.active") ?: "local"}.yml"
 
     // application property
     BASE_PROPERTY = new org.yaml.snakeyaml.Yaml().load(new File("${PROPERTY_ROOT_PATH}/${BASE_PROPERTY_FILE}").newInputStream())
-    // EXTENSION_PROPERTY = new org.yaml.snakeyaml.Yaml().load(new File("${PROPERTY_ROOT_PATH}/${EXTENSION_PROPERTY_FILE}").newInputStream())
+    EXTENSION_PROPERTY = new org.yaml.snakeyaml.Yaml().load(new File("${PROPERTY_ROOT_PATH}/${EXTENSION_PROPERTY_FILE}").newInputStream())
+
+    // datasource
+    DATASOURCE_DRIVER = BASE_PROPERTY.spring.datasource.driver
+    DATASOURCE_URL = EXTENSION_PROPERTY.spring.datasource.url
+    DATASOURCE_USERNAME = EXTENSION_PROPERTY.spring.datasource.username
+    DATASOURCE_PASSWORD = EXTENSION_PROPERTY.spring.datasource.password
 }
 
 apply from: "${GRADLE_ROOT_PATH}/flyway.gradle"

@@ -12,10 +12,10 @@ task mbgenerate doLast {
             classname: "org.mybatis.generator.ant.GeneratorAntTask"
     )
 
-    ant.properties["db.url"] = BASE_PROPERTY.spring.datasource.url.toString()
-    ant.properties["db.user"] = BASE_PROPERTY.spring.datasource.username.toString()
-    ant.properties["db.password"] = BASE_PROPERTY.spring.datasource.password.toString()
-    ant.properties["db.driver"] = BASE_PROPERTY.spring.datasource.driver.toString()
+    ant.properties["db.url"] = DATASOURCE_URL.toString()
+    ant.properties["db.user"] = DATASOURCE_USERNAME.toString()
+    ant.properties["db.password"] = DATASOURCE_PASSWORD.toString()
+    ant.properties["db.driver"] = DATASOURCE_DRIVER.toString()
     ant.properties["generator.model.project"] = JAVA_ROOT_PATH.toString()
     ant.properties["generator.model.package"] = MYBATIS_MODEL_PACKAGE.toString()
     ant.properties["generator.client.project"] = JAVA_ROOT_PATH.toString()
