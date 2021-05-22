@@ -1,5 +1,6 @@
 test {
     useJUnitPlatform()
+    jvmArgs "-javaagent:${classpath.find { it.name.contains("jmockit") }.absolutePath}"
     testLogging {
         showStandardStreams true
         exceptionFormat "full"
