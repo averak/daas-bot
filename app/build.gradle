@@ -83,7 +83,9 @@ ext {
 
     // application property file
     BASE_PROPERTY_FILE = "application.yml"
-    EXTENSION_PROPERTY_FILE = "application-${System.getProperty("spring.profiles.active") ?: "local"}.yml"
+    task_name = project.gradle.startParameter.taskNames[0]
+    environment = task_name == "test" ? "test" : "local"
+    EXTENSION_PROPERTY_FILE = "application-${environment}.yml"
 
     // application property
     BASE_PROPERTY = new org.yaml.snakeyaml.Yaml().load(new File("${PROPERTY_ROOT_PATH}/${BASE_PROPERTY_FILE}").newInputStream())
